@@ -32,7 +32,11 @@ const Orders: React.FC = () => {
 
   useEffect(() => {
     async function loadOrders(): Promise<void> {
-      // Load orders from API
+      const response = await api.get('orders');
+
+      console.log(response.data);
+
+      setOrders(response.data);
     }
 
     loadOrders();
@@ -57,9 +61,9 @@ const Orders: React.FC = () => {
                 />
               </FoodImageContainer>
               <FoodContent>
-                <FoodTitle>{item.name}</FoodTitle>
+                <FoodTitle>{item.name} - {item.id}</FoodTitle>
                 <FoodDescription>{item.description}</FoodDescription>
-                <FoodPricing>{item.formattedPrice}</FoodPricing>
+                <FoodPricing>{item.price}</FoodPricing>
               </FoodContent>
             </Food>
           )}
